@@ -1,12 +1,343 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Portafolio</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anthony | Mi Portafolio de Software</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset básico y configuración de fuentes */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden; /* Evita el scroll horizontal */
+            font-family: 'Poppins', sans-serif; /* Fuente moderna */
+            color: #333; /* Color de texto principal */
+        }
+
+        body {
+            background-color: #1e2a38; /* Fondo oscuro sutil para contrastar con los bloques de contenido */
+            display: flex;
+            justify-content: center; /* Centra el contenido horizontalmente */
+            align-items: flex-start; /* Alinea el contenido al inicio verticalmente */
+            min-height: 100vh; /* Ocupa al menos el 100% del alto de la ventana */
+            box-sizing: border-box;
+            padding: 40px 20px; /* Padding alrededor del contenedor principal */
+        }
+
+        .main-container {
+            background-color: #3f51b5; /* Azul medio, similar al de la imagen */
+            border-radius: 12px; /* Bordes más suaves */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* Sombra más pronunciada */
+            padding: 40px;
+            width: 100%;
+            max-width: 900px; /* Ancho máximo para el contenedor principal */
+            text-align: center;
+            color: white; /* Color de texto claro para el fondo azul */
+            display: flex;
+            flex-direction: column; /* Organiza los elementos en columna */
+            gap: 40px; /* Espacio entre secciones */
+        }
+
+        /* Sección de Encabezado */
+        .header-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Espacia el texto y el avatar */
+            text-align: left;
+            padding-bottom: 20px; /* Espacio inferior */
+            border-bottom: 1px solid rgba(255,255,255,0.2); /* Separador sutil */
+        }
+        .header-info h1 {
+            font-size: 2.2em;
+            margin-bottom: 5px;
+            font-weight: 700; /* Más negrita */
+        }
+        .header-info p {
+            font-size: 1.1em;
+            color: rgba(255,255,255,0.8);
+            margin: 0;
+        }
+        .header-avatar {
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255,255,255,0.2); /* Fondo del avatar */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em; /* Tamaño de ícono si se usa */
+            color: rgba(255,255,255,0.6);
+            border: 2px solid rgba(255,255,255,0.3); /* Borde sutil */
+        }
+        /* Icono de persona para el avatar */
+        .header-avatar::before {
+            content: '👤'; /* Unicode para un ícono de persona */
+            font-size: 3em;
+            line-height: 1; /* Alineación vertical */
+        }
+
+
+        /* Sección de Proyectos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas responsivas */
+            gap: 30px; /* Espacio entre proyectos */
+            margin-top: 20px;
+        }
+        .project-item {
+            background-color: rgba(255,255,255,0.1); /* Fondo claro para cada proyecto */
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+            text-decoration: none; /* Quita subrayado a los enlaces */
+            color: white; /* Color de texto para el proyecto */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .project-item:hover {
+            transform: translateY(-8px); /* Elevación al pasar el mouse */
+            box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+        }
+        .project-item img {
+            width: 100%; /* Imágenes responsivas */
+            max-width: 200px; /* Ancho máximo para las imágenes */
+            height: 140px;
+            object-fit: cover; /* Asegura que la imagen cubra el espacio */
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255,255,255,0.2); /* Borde sutil a la imagen */
+        }
+        .project-item h3 {
+            font-size: 1.4em;
+            margin: 0 0 5px 0;
+            font-weight: 600;
+        }
+        .project-item p {
+            font-size: 0.95em;
+            color: rgba(255,255,255,0.7);
+            margin: 0;
+        }
+
+        /* Sección Sobre Mí */
+        .about-me-section {
+            text-align: left;
+            background-color: rgba(255,255,255,0.1); /* Fondo para esta sección */
+            border-radius: 10px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 30px; /* Espacio entre el avatar y el texto */
+        }
+        .about-me-avatar {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0; /* Evita que el avatar se encoja */
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .about-me-avatar::before {
+            content: '👤';
+            font-size: 2.5em;
+            line-height: 1;
+            color: rgba(255,255,255,0.6);
+        }
+        .about-me-info h2 {
+            font-size: 1.8em;
+            margin: 0 0 10px 0;
+            font-weight: 600;
+        }
+        .about-me-info p {
+            font-size: 1.1em;
+            color: rgba(255,255,255,0.8);
+            margin: 0;
+        }
+
+        /* Sección de Contacto */
+        .contact-section {
+            text-align: left;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 30px;
+        }
+        .contact-section h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Espacio entre los campos */
+        }
+        .contact-form label {
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            display: block; /* Para que cada label ocupe su propia línea */
+            color: rgba(255,255,255,0.9);
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: calc(100% - 24px); /* Ancho completo menos padding */
+            padding: 12px;
+            background-color: rgba(255,255,255,0.2); /* Fondo de input más claro */
+            border: 1px solid rgba(255,255,255,0.3); /* Borde suave */
+            border-radius: 8px;
+            color: white; /* Color de texto del input */
+            font-size: 1em;
+            box-sizing: border-box; /* Incluye padding y border en el ancho total */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: rgba(255,255,255,0.6); /* Color del placeholder */
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            background-color: rgba(255,255,255,0.3);
+            border-color: #64b5f6; /* Borde al enfocar */
+        }
+        .contact-form textarea {
+            resize: vertical; /* Permite redimensionar verticalmente */
+            min-height: 100px;
+        }
+        .contact-form button {
+            background-color: #4CAF50; /* Un verde vibrante para el botón */
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .contact-form button:hover {
+            background-color: #66bb6a; /* Verde más claro al pasar el mouse */
+            transform: translateY(-2px); /* Pequeña elevación */
+        }
+
+        /* Media Queries para responsividad */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 25px;
+                gap: 30px;
+            }
+            .header-section {
+                flex-direction: column; /* Apila el avatar y la info en pantallas pequeñas */
+                text-align: center;
+                gap: 15px;
+            }
+            .header-info {
+                width: 100%; /* Ocupa todo el ancho */
+            }
+            .header-avatar {
+                margin-bottom: 15px; /* Espacio debajo del avatar */
+            }
+            .projects-grid {
+                grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+            }
+            .about-me-section {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            .main-container {
+                padding: 20px;
+                gap: 25px;
+            }
+            .header-info h1 {
+                font-size: 1.8em;
+            }
+            .header-info p {
+                font-size: 1em;
+            }
+            .project-item img {
+                height: 120px;
+            }
+            .contact-form input,
+            .contact-form textarea,
+            .contact-form button {
+                padding: 10px;
+                font-size: 0.95em;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Bienvenido a mi portafolio</h1>
+    <div class="main-container">
+        <div class="header-section">
+            <div class="header-info">
+                <h1>Hola soy Anthony</h1>
+                <p>Estudiante de desarrollo de software</p>
+                <p>Mi Portafolio</p>
+            </div>
+            <div class="header-avatar"></div> </div>
+
+        <div class="projects-grid">
+            <a href="proyecto1.html" class="project-item">
+                <img src="Captura de pantalla 2025-06-02 104524.png" alt="Proyecto 1">
+                <h3>Proyecto 1</h3>
+                <p>Descripción del proyecto</p>
+                <p>hablaremos sobre nuestro proyecto piensa</p>
+            </a>
+            <a href="proyecto2.html" class="project-item">
+                <img src="images4.png" alt="Proyecto 2">
+                <h3>Proyecto 2</h3>
+                <p>Descripción del proyecto</p>
+                <p>veremos un ejercicio de javascript de suma
+                  y resta</p>
+            </a>
+            <a href="proyecto3.html" class="project-item">
+                <img src="descarga5.png" alt="Proyecto 3">
+                <h3>Proyecto 3</h3>
+                <p>Descripción del proyecto</p>
+                <p>veremos alunas cosas importantes que
+                  no sabes</p>
+            </a>
+            </div>
+
+        <div class="about-me-section">
+            <div class="about-me-avatar"></div> <div class="about-me-info">
+                <h2>Sobre Mí</h2>
+                <p>Hola soy Anthony Cedeño, soy estudiante de primer ciclo en la carrera de software. Apasionado por aprender y construir soluciones innovadoras.</p>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <h2>CONTACTO</h2>
+            <form class="contact-form">
+                <label for="nombre">NOMBRE:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Tu Nombre Completo">
+
+                <label for="email">EMAIL:</label>
+                <input type="email" id="email" name="email" placeholder="tu.correo@ejemplo.com">
+
+                <label for="mensaje">MENSAJE:</label>
+                <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje aquí..."></textarea>
+
+                <button type="submit">ENVIAR MENSAJE</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
